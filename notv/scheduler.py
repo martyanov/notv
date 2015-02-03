@@ -15,7 +15,7 @@ import schedule
 
 
 def run_scheduler(func, period=1):
-    schedule.every(period).second.do(func)
+    schedule.every(period).minutes.do(func)
 
     def worker():
         while threading.active_count() > 0:
