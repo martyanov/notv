@@ -8,4 +8,5 @@ Werkzeug==0.10
 gunicorn==19.2.0
 itsdangerous==0.24
 psycopg2==2.5.4
+requests==2.5.1
 schedule==0.3.1
