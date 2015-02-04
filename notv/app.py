@@ -12,7 +12,7 @@ import os
 
 import flask
 
-from .extensions import db
+from .extensions import db, mailgun
 from .views import IndexView
 
 
@@ -25,6 +25,10 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL',
         'sqlite:////tmp/test.db')
 
+    app.config['MAILGUN_DOMAIN'] = os.environ.get('MAILGUN_DOMAIN')
+    app.config['MAILGUN_API_KEY'] = os.environ.get('MAILGUN_API_KEY')
+    app.config['MAILGUN_DEFAULT_FROM'] = os.environ.get('MAILGUN_DEFAULT_FROM')
+
     if os.environ.get('NOTV_CONF'):
         app.config.from_envvar('NOTV_CONF')
     else:
@@ -32,6 +36,7 @@ def create_app():
         app.config.from_pyfile(path, silent=True)
 
     db.init_app(app)
+    mailgun.init_app(app)
 
     IndexView.register(app)
 

@@ -9,6 +9,8 @@
 """
 
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask_mailgun import Mailgun
 
 
 db = SQLAlchemy()
+mailgun = Mailgun()
