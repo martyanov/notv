@@ -21,7 +21,9 @@ def create_app():
 
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY',
         'replace-me-with-real-secret-key')
-    app.config['DEBUG'] = True
+    if 'NOTV_DEV' in os.environ:
+        app.config['DEBUG'] = True
+        app.config['SQLALCHEMY_ECHO'] = True
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL',
         'sqlite:////tmp/test.db')
 
