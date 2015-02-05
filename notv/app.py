@@ -12,7 +12,7 @@ import os
 
 import flask
 
-from .extensions import db, mailgun
+from .extensions import db, mailgun, migrate
 from .views import IndexView
 
 
@@ -37,6 +37,7 @@ def create_app():
 
     db.init_app(app)
     mailgun.init_app(app)
+    migrate.init_app(app, db)
 
     IndexView.register(app)
 
