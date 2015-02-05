@@ -20,6 +20,7 @@ def client(request):
     client = app.test_client()
     return client
 
+
 def test_index_page(client):
     r = client.get('/')
     assert r.status_code == 200
