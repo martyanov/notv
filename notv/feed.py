@@ -68,6 +68,6 @@ def parse_show_data(show_data):
         show['latest_episode_title'] = latest_episode.find('title').text
         show['latest_episode_date'] = latest_episode.find('airdate').text
 
-    logger.debug("Succesuflly parsed episode data: {}".format(show))
+    logger.debug("Successfully parsed episode data: {}".format(show))
 
     return show
