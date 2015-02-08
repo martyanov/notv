@@ -8,8 +8,6 @@
     :license: MIT, see LICENSE for more details.
 """
 
-from flask import Response, render_template
-
 from flask.ext.classy import FlaskView, route
 
 
