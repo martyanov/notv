@@ -12,6 +12,7 @@ import os
 
 import flask
 
+from .api import ShowsApiView
 from .extensions import db, mailgun, migrate
 from .views import IndexView
 
@@ -21,6 +22,7 @@ def create_app():
 
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY',
         'replace-me-with-real-secret-key')
+    app.config['AUTH_KEY'] = 'not-secure-key'
     if 'NOTV_DEV' in os.environ:
         app.config['DEBUG'] = True
         app.config['SQLALCHEMY_ECHO'] = True
@@ -42,5 +44,7 @@ def create_app():
     migrate.init_app(app, db)
 
     IndexView.register(app)
+
+    ShowsApiView.register(app)
 
     return app
