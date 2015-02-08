@@ -34,7 +34,9 @@ def _make_feed_url(show_id):
 def fetch_show_data(show_id):
     feed_url = _make_feed_url(show_id)
     try:
-        return requests.get(feed_url, timeout=(30, 30)).content
+        r = requests.get(feed_url, timeout=(30, 30))
+        r.raise_for_status()
+        return r.content
     except requests.exceptions.RequestException as e:
         logger.exception(e)
         raise FetchError(e)

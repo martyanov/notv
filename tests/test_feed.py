@@ -54,18 +54,19 @@ def test_make_feed_url():
 def test_fetch_show_data_ok():
     feed_url = _make_feed_url(25)
     responses.add(responses.GET, feed_url,
-                  body=b'ok', status=200)
+                  body=b'ok', status=200,
+                  match_querystring=True)
 
     r = fetch_show_data(25)
 
-    assert r.content == b'ok'
+    assert r == b'ok'
 
 
 @responses.activate
 def test_fetch_show_data_error():
     feed_url = _make_feed_url(25)
     responses.add(responses.GET, feed_url,
-                  status=500)
+                  status=500, match_querystring=True)
 
     with pytest.raises(FetchError):
         fetch_show_data(25)
