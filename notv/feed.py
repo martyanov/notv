@@ -39,7 +39,7 @@ def fetch_show_data(show_id):
         return r.content
     except requests.exceptions.RequestException as e:
         logger.exception(e)
-        raise FetchError(e)
+        raise FetchError from e
 
 
 def parse_show_data(show_data):
@@ -49,7 +49,7 @@ def parse_show_data(show_data):
         parsed = ET.fromstring(show_data)
     except (ValueError, TypeError, ET.ParseError) as e:
         logger.exception(e)
-        raise ParseError(e)
+        raise ParseError from e
 
     show['name'] = parsed.find('name').text
     show['link'] = parsed.find('link').text
