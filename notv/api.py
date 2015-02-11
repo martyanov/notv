@@ -11,8 +11,9 @@
 from functools import wraps
 
 from flask import current_app, jsonify, request
-
 from flask.ext.classy import FlaskView
+
+from .models import Show
 
 
 def auth_required(func):
@@ -36,4 +37,5 @@ class ShowsApiView(BaseApiView):
     route_base = 'shows'
 
     def index(self):
-        return 'Shows list'
+        shows = Show.query.all()
+        return jsonify(shows=[show.to_dict() for show in shows])
